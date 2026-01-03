@@ -1,0 +1,16 @@
+shamefully-copied-from: https://github.com/replit/kaboom/discussions/161
+dist: 1
+index.js: 2
+
+<<< downstream
+--- a/src/location.ts
++++ b/src/location.ts
+@@ -35,7 +35,7 @@ export const useLocationProperty = (
+ ): string => {
+   const [value, update] = useState(getCurrentValue);
+   // A ref, to cancel effects
+-  const prevValueRef = useRef<string>(value);
++  const prevValueRef = useRef<string | null>(null);
+ 
+   useEffect(() => {
+     const getValue = () => {
