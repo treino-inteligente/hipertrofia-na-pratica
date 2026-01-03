@@ -1,24 +1,46 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Router as WouterRouter, Switch } from "wouter";
+import { Route, Router, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import { useMemo } from "react";
 
-// Get base path from Vite config for GitHub Pages compatibility
-const base = import.meta.env.BASE_URL;
+// Custom hook for base path routing in GitHub Pages
+function useBaseLocation() {
+  const base = import.meta.env.BASE_URL || "/";
+  
+  return useMemo(() => {
+    return () => {
+      const path = window.location.pathname;
+      // Remove base from path
+      const relativePath = path.startsWith(base) 
+        ? path.slice(base.length - 1) || "/"
+        : path;
+      
+      return [
+        relativePath,
+        (to: string) => {
+          // Add base when navigating
+          const fullPath = to === "/" ? base : `${base}${to.replace(/^\//, "")}`;
+          window.history.pushState(null, "", fullPath);
+          // Trigger popstate to update wouter
+          window.dispatchEvent(new PopStateEvent("popstate"));
+        }
+      ] as [string, (path: string) => void];
+    };
+  }, [base]);
+}
 
-function Router() {
+function Routes() {
   return (
-    <WouterRouter base={base}>
-      <Switch>
-        <Route path={"/"} component={Home} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
-        <Route component={NotFound} />
-      </Switch>
-    </WouterRouter>
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/404" component={NotFound} />
+      {/* Final fallback route */}
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
@@ -28,6 +50,8 @@ function Router() {
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
+  const hook = useBaseLocation();
+  
   return (
     <ErrorBoundary>
       <ThemeProvider
@@ -36,7 +60,9 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <Router hook={hook}>
+            <Routes />
+          </Router>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
