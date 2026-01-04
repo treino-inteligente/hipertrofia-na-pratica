@@ -243,4 +243,18 @@
     @apply text-accent;
     text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
   }
+
+  /* Mobile optimizations - garantir espaço para botão fixo no fundo */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: 80px; /* Espaço para o botão fixo no mobile */
+    }
+  }
+
+  /* Garantir que touch targets sejam adequados no mobile */
+  @media (max-width: 640px) {
+    button, a[href] {
+      min-height: 44px; /* Tamanho mínimo recomendado pela Apple para touch targets */
+    }
+  }
 }

@@ -47,20 +47,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* ============ URGENCY BAR ============ */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-accent text-background py-3 px-4 text-center font-bold shadow-lg animate-pulse">
-        <div className="flex items-center justify-center gap-4 flex-wrap">
-          <AlertTriangle className="w-5 h-5" />
-          <span className="text-sm md:text-base">
-            ⚠️ APENAS {Math.floor(Math.random() * 8) + 3} VAGAS RESTANTES - Esta oferta expira em:
+      <div className="fixed top-0 left-0 right-0 z-50 bg-accent text-background py-2 sm:py-3 px-2 sm:px-4 text-center font-bold shadow-lg animate-pulse">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap text-xs sm:text-sm">
+          <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="text-xs sm:text-sm md:text-base">
+            ⚠️ APENAS {Math.floor(Math.random() * 8) + 3} VAGAS - Expira em:
           </span>
-          <div className="flex gap-2 text-background">
-            <span className="bg-background/20 px-2 py-1 rounded">
+          <div className="flex gap-1 sm:gap-2 text-background text-xs sm:text-sm">
+            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
               {String(timeLeft.hours).padStart(2, "0")}h
             </span>
-            <span className="bg-background/20 px-2 py-1 rounded">
+            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
               {String(timeLeft.minutes).padStart(2, "0")}m
             </span>
-            <span className="bg-background/20 px-2 py-1 rounded">
+            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
               {String(timeLeft.seconds).padStart(2, "0")}s
             </span>
           </div>
@@ -68,7 +68,7 @@ export default function Home() {
       </div>
 
       {/* ============ HERO SECTION ============ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-32 pb-24 md:pb-20">
         {/* Background image with overlay */}
         <div
           className="absolute inset-0 z-0"
@@ -99,14 +99,14 @@ export default function Home() {
             {/* Main Headline */}
             <div className="space-y-4">
               <h1
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95]"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] md:leading-[0.95]"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 Você Está{" "}
                 <span className="text-accent glow-accent">DESPERDIÇANDO</span>
               </h1>
               <h1
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95]"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] md:leading-[0.95]"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 Seu Tempo na Academia?
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-3xl text-muted-foreground leading-relaxed max-w-3xl font-light">
+            <p className="text-lg sm:text-xl md:text-3xl text-muted-foreground leading-relaxed max-w-3xl font-light">
               Se você treina há mais de <span className="text-accent font-bold">6 meses</span> e ainda não vê resultados REAIS...
               <br />
               <span className="text-foreground font-bold">
@@ -142,21 +142,21 @@ export default function Home() {
             </div>
 
             {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-8">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-8">
               <button
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-lg md:text-xl px-12 py-6 shadow-2xl shadow-accent/50 animate-pulse"
+                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 py-5 sm:py-6 shadow-2xl shadow-accent/50 animate-pulse w-full sm:w-auto"
               >
-                <Zap className="w-6 h-6 mr-2 inline" />
-                SIM! QUERO RESULTADOS REAIS AGORA
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
+                <span className="text-sm sm:text-base md:text-lg">SIM! QUERO RESULTADOS REAIS AGORA</span>
               </button>
               <button 
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="px-8 py-6 border-2 border-accent text-accent rounded-lg font-bold text-lg transition-all duration-300 hover:bg-accent/10 hover:scale-105"
+                className="px-6 sm:px-8 py-5 sm:py-6 border-2 border-accent text-accent rounded-lg font-bold text-base sm:text-lg transition-all duration-300 hover:bg-accent/10 hover:scale-105 w-full sm:w-auto"
               >
                 QUERO COMEÇAR AGORA
               </button>
@@ -182,26 +182,26 @@ export default function Home() {
       </section>
 
       {/* ============ PROBLEM SECTION (EXPANDED - 7 DORES) ============ */}
-      <section className="py-24 bg-gradient-to-b from-card/50 to-background border-t border-border">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-card/50 to-background border-t border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="space-y-16">
-            <div className="space-y-6 text-center max-w-3xl mx-auto">
+            <div className="space-y-4 sm:space-y-6 text-center max-w-3xl mx-auto">
               <h2
-                className="text-4xl md:text-6xl font-black"
+                className="text-3xl sm:text-4xl md:text-6xl font-black"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 Por Que Você Não Está{" "}
                 <span className="text-destructive">CRESCENDO</span>?
               </h2>
-              <div className="h-1 w-32 bg-destructive mx-auto" />
-              <p className="text-xl text-muted-foreground">
+              <div className="h-1 w-24 sm:w-32 bg-destructive mx-auto" />
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
                 A maioria dos praticantes <span className="text-foreground font-bold">NUNCA</span> alcança seu potencial real.
                 <br />
                 Não por falta de esforço... mas por falta de <span className="text-accent font-bold">DIREÇÃO</span>.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
                   title: "Treinos Copiados do Instagram",
@@ -554,10 +554,10 @@ export default function Home() {
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-xl px-16 py-6 shadow-2xl shadow-accent/50"
+                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full sm:w-auto"
               >
-                <Zap className="w-6 h-6 mr-2 inline" />
-                GARANTIR MINHA VAGA AGORA
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
+                <span className="text-sm sm:text-base md:text-lg">GARANTIR MINHA VAGA AGORA</span>
               </button>
 
               <div className="flex flex-col items-center gap-2">
@@ -1105,12 +1105,12 @@ export default function Home() {
                   onClick={() => {
                     window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                   }}
-                  className="w-full bg-accent hover:bg-accent/90 text-background font-black text-xl md:text-2xl py-6 md:py-8 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-2xl shadow-accent/50 animate-pulse"
+                  className="w-full bg-accent hover:bg-accent/90 text-background font-black text-lg sm:text-xl md:text-2xl py-6 md:py-8 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-2xl shadow-accent/50 animate-pulse"
                 >
-                  <Zap className="w-8 h-8 mr-3 inline" />
-                  SIM! QUERO GARANTIR MINHA VAGA AGORA
+                  <Zap className="w-6 h-6 sm:w-8 sm:h-8 mr-2 sm:mr-3 inline" />
+                  <span>SIM! QUERO GARANTIR MINHA VAGA AGORA</span>
                   <br />
-                  <span className="text-sm font-normal opacity-90">
+                  <span className="text-xs sm:text-sm font-normal opacity-90">
                     (ACESSO IMEDIATO - COMPRA 100% SEGURA)
                   </span>
                 </button>
@@ -1240,10 +1240,10 @@ export default function Home() {
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-xl px-12 py-6 shadow-2xl shadow-accent/50"
+                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full sm:w-auto"
               >
-                <Zap className="w-6 h-6 mr-2 inline" />
-                CHEGA DE ENROLAÇÃO - EU QUERO CRESCER!
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
+                <span className="text-sm sm:text-base md:text-lg">CHEGA DE ENROLAÇÃO - EU QUERO CRESCER!</span>
               </button>
 
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
@@ -1291,6 +1291,21 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* BOTÃO FIXO MOBILE - SEMPRE VISÍVEL */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+        <button
+          onClick={() => {
+            window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
+          }}
+          className="w-full bg-accent hover:bg-accent/90 text-background font-black text-base sm:text-lg py-5 px-4 transition-all duration-300 shadow-2xl border-t-4 border-accent/20 animate-pulse"
+        >
+          <div className="flex items-center justify-center gap-2">
+            <Zap className="w-6 h-6" />
+            <span>GARANTIR MINHA VAGA AGORA</span>
+          </div>
+        </button>
+      </div>
     </div>
   );
 }
