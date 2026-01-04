@@ -49,7 +49,6 @@ export default function Home() {
       {/* ============ URGENCY BAR ============ */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-accent text-background py-2 sm:py-3 px-2 sm:px-4 text-center font-bold shadow-lg animate-pulse">
         <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap text-xs sm:text-sm">
-          <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
           <span className="text-xs sm:text-sm md:text-base">
             ⚠️ APENAS {Math.floor(Math.random() * 8) + 3} VAGAS - Expira em:
           </span>
