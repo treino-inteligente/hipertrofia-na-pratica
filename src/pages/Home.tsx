@@ -145,8 +145,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 pt-8">
               <button
                 onClick={() => {
-                  const checkoutSection = document.getElementById("checkout");
-                  checkoutSection?.scrollIntoView({ behavior: "smooth" });
+                  window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="btn-cta text-lg md:text-xl px-12 py-6 shadow-2xl shadow-accent/50 animate-pulse"
               >
@@ -155,12 +154,11 @@ export default function Home() {
               </button>
               <button 
                 onClick={() => {
-                  const benefitsSection = document.querySelector('[data-section="benefits"]');
-                  benefitsSection?.scrollIntoView({ behavior: "smooth" });
+                  window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="px-8 py-6 border-2 border-accent text-accent rounded-lg font-bold text-lg transition-all duration-300 hover:bg-accent/10 hover:scale-105"
               >
-                Ver Como Funciona ↓
+                QUERO COMEÇAR AGORA
               </button>
             </div>
 
@@ -554,8 +552,7 @@ export default function Home() {
 
               <button
                 onClick={() => {
-                  const checkoutSection = document.getElementById("checkout");
-                  checkoutSection?.scrollIntoView({ behavior: "smooth" });
+                  window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="btn-cta text-xl px-16 py-6 shadow-2xl shadow-accent/50"
               >
