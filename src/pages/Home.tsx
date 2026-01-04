@@ -381,7 +381,7 @@ export default function Home() {
               {/* Product showcase image */}
               <div className="relative rounded-xl overflow-hidden border-2 border-accent shadow-2xl shadow-accent/20">
                 <img
-                  src="/images/product-showcase.jpg"
+                  src="./images/product-showcase.jpg"
                   alt="Treino Inteligente - Sistema Completo"
                   className="w-full h-auto object-cover"
                 />
@@ -597,9 +597,9 @@ export default function Home() {
             </div>
 
             {/* Transformation abstract image */}
-            <div className="relative rounded-2xl overflow-hidden border-2 border-accent shadow-2xl shadow-accent/20 max-w-4xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-accent shadow-2xl shadow-2xl shadow-accent/20 max-w-4xl mx-auto">
               <img
-                src="/images/transformation-abstract.jpg"
+                src="./images/transformation-abstract.jpg"
                 alt="Transformação e Crescimento"
                 className="w-full h-auto object-cover"
               />
