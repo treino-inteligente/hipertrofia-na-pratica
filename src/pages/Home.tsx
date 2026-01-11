@@ -92,7 +92,7 @@ export default function Home() {
                 }}
                 className="btn-cta text-base sm:text-lg px-8 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full"
               >
-                <span>Quero Acessar por R$ 19,90</span>
+                <span>Quero usar esse sistema de treino por R$ 19,90</span>
               </button>
               <p className="text-xs text-center text-muted-foreground">
                 Pagamento seguro processado pela Kiwify
@@ -605,7 +605,7 @@ export default function Home() {
                 }}
                 className="btn-cta text-base sm:text-lg px-12 py-6 shadow-2xl shadow-accent/50 mx-auto"
               >
-                Quero Acessar Agora
+                Quero Usar Esse Sistema
               </button>
 
               <p className="text-xs text-muted-foreground pt-2">
@@ -1281,7 +1281,7 @@ export default function Home() {
           className="w-full bg-accent hover:bg-accent/90 text-background font-bold text-base py-4 px-4 transition-all shadow-xl border-t-2 border-background"
         >
           <div className="flex items-center justify-center gap-2">
-            <span>Acessar por R$ 19,90</span>
+            <span>Quero usar esse sistema de treino por R$ 19,90</span>
           </div>
         </button>
       </div>
