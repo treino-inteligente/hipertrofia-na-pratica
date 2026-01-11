@@ -12,28 +12,6 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({
-    hours: 23,
-    minutes: 47,
-    seconds: 30,
-  });
-
-  // Countdown timer effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { hours: prev.hours, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   // Track scroll for parallax effects
   useEffect(() => {
@@ -46,28 +24,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      {/* ============ URGENCY BAR ============ */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-accent text-background py-2 sm:py-3 px-2 sm:px-4 text-center font-bold shadow-lg animate-pulse">
-        <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap text-xs sm:text-sm">
-          <span className="text-xs sm:text-sm md:text-base">
-            ⚠️ APENAS {Math.floor(Math.random() * 8) + 3} VAGAS - Expira em:
-          </span>
-          <div className="flex gap-1 sm:gap-2 text-background text-xs sm:text-sm">
-            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
-              {String(timeLeft.hours).padStart(2, "0")}h
-            </span>
-            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
-              {String(timeLeft.minutes).padStart(2, "0")}m
-            </span>
-            <span className="bg-background/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm">
-              {String(timeLeft.seconds).padStart(2, "0")}s
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* ============ HERO SECTION ============ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-32 pb-24 md:pb-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20 pb-24 md:pb-20">
         {/* Background image with overlay */}
         <div
           className="absolute inset-0 z-0"
@@ -87,93 +45,179 @@ export default function Home() {
         {/* Content */}
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           <div className="space-y-8 animate-fade-in">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent px-4 py-2 rounded-full">
-              <Star className="w-4 h-4 text-accent" />
-              <span className="text-sm font-bold text-accent">
-                +347 PESSOAS JÁ TRANSFORMARAM SEUS TREINOS
-              </span>
-            </div>
-
             {/* Main Headline */}
             <div className="space-y-4">
               <h1
-                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] md:leading-[0.95]"
+                className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] md:leading-[1.05]"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                Você Está{" "}
-                <span className="text-accent glow-accent">DESPERDIÇANDO</span>
-              </h1>
-              <h1
-                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] md:leading-[0.95]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                Seu Tempo na Academia?
+                Um sistema simples de treino para quem{" "}
+                <span className="text-accent">já treina, mas parou de evoluir</span>
               </h1>
             </div>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl md:text-3xl text-muted-foreground leading-relaxed max-w-3xl font-light">
-              Se você treina há mais de <span className="text-accent font-bold">6 meses</span> e ainda não vê resultados REAIS...
-              <br />
-              <span className="text-foreground font-bold">
-                O problema não é seu esforço. É o seu MÉTODO.
-              </span>
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+              Planilha + PDF prático para organizar seus treinos, progredir cargas e parar de treinar no escuro.
             </p>
 
-            {/* Pain Points - Quick List */}
-            <div className="bg-card/50 border-2 border-destructive/50 rounded-lg p-6 space-y-3 max-w-2xl">
-              <p className="font-bold text-destructive flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5" />
-                Reconhece algum desses sinais?
+            {/* Mini insight */}
+            <p className="text-base md:text-lg text-foreground/80 italic max-w-2xl border-l-4 border-accent pl-4">
+              A maioria das pessoas não falha por falta de esforço, mas por treinar sem estrutura.
+            </p>
+
+            {/* Para quem é */}
+            <div className="bg-card/50 border border-border rounded-lg p-6 space-y-3 max-w-2xl">
+              <p className="font-semibold text-foreground">
+                Este produto é para você se:
               </p>
               {[
-                "Treina pesado mas continua com o mesmo corpo de meses atrás",
-                "Não sabe se está progredindo ou apenas se machucando",
-                "Copia treinos do Instagram que não funcionam para VOCÊ",
-                "Sente que outros evoluem mais rápido",
-              ].map((pain, idx) => (
+                "É iniciante ou avançado na musculação",
+                "Busca um método simples e organizado para progredir",
+                "Quer acompanhar seus treinos de forma clara e visual",
+                "Prefere planos baseados em evidências ao invés de 'modinha'",
+              ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2 text-sm">
-                  <X className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{pain}</span>
+                  <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">{item}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-8">
+            <div className="flex flex-col gap-4 pt-8 max-w-md">
               <button
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 py-5 sm:py-6 shadow-2xl shadow-accent/50 animate-pulse w-full sm:w-auto"
+                className="btn-cta text-base sm:text-lg px-8 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full"
               >
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
-                <span className="text-sm sm:text-base md:text-lg">SIM! QUERO RESULTADOS REAIS AGORA</span>
+                <span>Quero Acessar por R$ 19,90</span>
               </button>
-              <button 
-                onClick={() => {
-                  window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
-                }}
-                className="px-6 sm:px-8 py-5 sm:py-6 border-2 border-accent text-accent rounded-lg font-bold text-base sm:text-lg transition-all duration-300 hover:bg-accent/10 hover:scale-105 w-full sm:w-auto"
-              >
-                QUERO COMEÇAR AGORA
-              </button>
+              <p className="text-xs text-center text-muted-foreground">
+                Pagamento seguro processado pela Kiwify
+                <br />
+                Você será redirecionado para o checkout
+              </p>
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap gap-6 pt-12 text-sm">
+            <div className="flex flex-wrap gap-6 pt-8 text-sm">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Check className="w-5 h-5 text-accent" />
-                <span className="font-semibold">Acesso Instantâneo</span>
+                <span className="font-medium">Acesso por e-mail após pagamento</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Shield className="w-5 h-5 text-accent" />
-                <span className="font-semibold">Garantia Incondicional de 7 Dias</span>
+                <span className="font-medium">Garantia de 7 dias</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Users className="w-5 h-5 text-accent" />
-                <span className="font-semibold">+347 Alunos Transformados</span>
+                <BookOpen className="w-5 h-5 text-accent" />
+                <span className="font-medium">PDF + Planilha editável</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ QUEM SOU EU - AUTORIDADE REAL ============ */}
+      <section className="py-16 md:py-20 bg-card/30 border-t border-border">
+        <div className="container max-w-4xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            {/* Foto perfil */}
+            <div className="flex-shrink-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-accent/10 border-2 border-accent overflow-hidden">
+                <img 
+                  src="/hipertrofia-na-pratica/images/perfil.jpg" 
+                  alt="Lucas Sambati"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Texto */}
+            <div className="flex-1 space-y-4 text-center md:text-left">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                  Olá, sou Lucas Sambati
+                </h2>
+                <p className="text-muted-foreground">
+                  Eu não sou Personal Trainer e nem Influencer Fitness.
+                  <br />
+                  <span className="text-foreground">Sou uma pessoa comum</span> que sempre treinou, se esforçava de verdade… e não via resultado.
+                </p>
+              </div>
+
+              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                Por muito tempo achei que o problema era a falta de vontade ou a genética.
+                <br />
+                Até entender que eu treinava <span className="text-foreground">sem estrutura, carga e progressão bem definidas.</span>
+              </p>
+
+              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                Então fui estudar a fundo como o treino realmente funciona.
+                <br />
+                <span className="text-foreground">Apliquei isso em mim mesmo</span> e finalmente consegui trazer para a vida real os resultados que a gente costuma ver só no Instagram.
+              </p>
+
+              {/* Fotos Antes/Depois */}
+              <div className="pt-2 pb-0 space-y-4">
+                <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto md:mx-0">
+                  {/* Antes */}
+                  <div className="space-y-2">
+                    <div className="relative rounded-lg overflow-hidden border-2 border-border shadow-lg">
+                      <img 
+                        src="/hipertrofia-na-pratica/images/antes.jpg" 
+                        alt="Antes - 4 anos de treino"
+                        className="w-full h-auto object-cover"
+                      />
+                      <div className="absolute top-2 left-2 bg-destructive/90 text-white text-xs px-2 py-1 rounded font-bold">
+                        ANTES
+                      </div>
+                    </div>
+                    <p className="text-xs text-center text-muted-foreground">
+                      4 anos de treino<br />sem método
+                    </p>
+                  </div>
+
+                  {/* Depois */}
+                  <div className="space-y-2">
+                    <div className="relative rounded-lg overflow-hidden border-2 border-accent shadow-lg">
+                      <img 
+                        src="/hipertrofia-na-pratica/images/depois.jpg" 
+                        alt="Depois - 1 ano aplicando o método"
+                        className="w-full h-auto object-cover"
+                      />
+                      <div className="absolute top-2 left-2 bg-accent text-background text-xs px-2 py-1 rounded font-bold">
+                        DEPOIS
+                      </div>
+                    </div>
+                    <p className="text-xs text-center text-muted-foreground">
+                      1 ano aplicando<br />este método
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                Esse método não é milagre nem promessa vazia.
+                <br />
+                <span className="text-foreground">É um sistema simples, prático e testado no dia a dia para quem quer resultados sem enrolação.</span>
+              </p>
+
+              <div className="flex flex-wrap gap-4 pt-4 text-sm justify-center md:justify-start">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Check className="w-4 h-4 text-accent" />
+                  <span>Baseado em uso real</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Check className="w-4 h-4 text-accent" />
+                  <span>Sem promessas absurdas</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Check className="w-4 h-4 text-accent" />
+                  <span>Suporte por e-mail</span>
+                </div>
               </div>
             </div>
           </div>
@@ -181,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* ============ PROBLEM SECTION (EXPANDED - 7 DORES) ============ */}
-      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-card/50 to-background border-t border-border">
+      <section className="pt-12 sm:pt-16 md:pt-24 bg-gradient-to-b from-card/50 to-background border-t border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="space-y-16">
             <div className="space-y-4 sm:space-y-6 text-center max-w-3xl mx-auto">
@@ -391,183 +435,290 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ WHAT'S INSIDE SECTION + BÔNUS ============ */}
-      <section className="py-24 bg-gradient-to-b from-card/30 to-background border-y border-border">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="space-y-16">
-            <div className="space-y-4 text-center">
+      {/* ============ WHAT'S INSIDE SECTION - REFATORADA ============ */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-card/30 border-t border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="space-y-12">
+            {/* Título */}
+            <div className="space-y-4 text-center max-w-3xl mx-auto">
               <h2
-                className="text-4xl md:text-6xl font-black"
+                className="text-3xl md:text-5xl font-black"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                O Que Você Recebe <span className="text-accent">HOJE</span>
+                O Que Você Vai Receber
               </h2>
-              <div className="h-1 w-32 bg-accent mx-auto" />
-              <p className="text-xl text-muted-foreground">
-                Valor total: <span className="line-through">R$ 97</span>{" "}
-                <span className="text-accent font-bold text-2xl">→ Por apenas R$ 19,90</span>
+              <div className="h-1 w-24 bg-accent mx-auto" />
+              <p className="text-lg md:text-xl text-muted-foreground">
+                Tudo o que você precisa para organizar seus treinos e progredir de forma consistente
               </p>
             </div>
 
-            {/* PRODUTO PRINCIPAL */}
-            <div className="space-y-8">
-              <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent rounded-xl p-8">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="bg-accent text-background rounded-full p-3">
-                    <BookOpen className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h3 className="text-3xl font-black mb-2">
-                      📖 PDF Treino Inteligente
-                    </h3>
-                  </div>
-                </div>
-
-                <p className="text-lg text-muted-foreground mb-6">
-                  Mais de <span className="text-foreground font-bold">50 páginas</span> de conteúdo denso e prático sobre:
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  {[
-                    "✅ Fundamentos científicos da hipertrofia (mecânica, metabólica, neural)",
-                    "✅ Como estruturar treinos A/B/C/Push/Pull para máximo crescimento",
-                    "✅ Seleção de exercícios baseada em evidências (não em ego)",
-                    "✅ Periodização: Linear, Ondulatória e DUP explicadas",
-                    "✅ Volume ideal por grupo muscular (não treine demais nem de menos)",
-                    "✅ Progressão de carga: quando e como aumentar os pesos",
-                    "✅ Técnicas avançadas: Drop sets, rest-pause, myo-reps",
-                    "✅ Nutrição para hipertrofia: calorias, proteínas, timing",
-                    "✅ Importância da recuperação e do sono (80% dos ganhos)",
-                    "✅ Como evitar lesões e treinar por décadas",
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-2 text-sm bg-background/50 rounded-lg p-3"
-                    >
-                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent rounded-xl p-8">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="bg-accent text-background rounded-full p-3">
-                    <BarChart3 className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h3 className="text-3xl font-black mb-2">
-                      📊 Planilha de Progressão Automática
-                    </h3>
-                  </div>
-                </div>
-
-                <p className="text-lg text-muted-foreground mb-6">
-                  A ferramenta que vai <span className="text-foreground font-bold">TRANSFORMAR</span> seus treinos em resultados mensuráveis:
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  {[
-                    "✅ Registro automático de todas as suas séries e cargas",
-                    "✅ Cálculo de volume total semanal (séries x reps x carga)",
-                    "✅ Gráficos de evolução por grupo muscular",
-                    "✅ Indicadores de quando aumentar a carga",
-                    "✅ Histórico completo: veja sua evolução de meses atrás",
-                    "✅ Compatível com Excel, Google Sheets e Numbers",
-                    "✅ 100% editável e personalizável ao SEU treino",
-                    "✅ Templates pré-configurados para ABC, ABCD, Push/Pull/Legs",
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-2 text-sm bg-background/50 rounded-lg p-3"
-                    >
-                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* BÔNUS SECTION */}
+            {/* Entregáveis */}
             <div className="space-y-6">
-              <div className="text-center space-y-3">
-                <div className="inline-flex items-center gap-2 bg-accent text-background px-6 py-3 rounded-full font-black text-lg animate-pulse">
-                  <Trophy className="w-6 h-6" />
-                  BÔNUS EXCLUSIVOS
+              {/* PDF */}
+              <div className="bg-card border-2 border-border rounded-xl p-6 md:p-8 hover:border-accent/50 transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 bg-accent/10 rounded-lg p-3">
+                    <BookOpen className="w-8 h-8 text-accent" />
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-xl md:text-2xl font-bold">
+                      📖 PDF: Treino Inteligente
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Guia completo sobre os fundamentos da hipertrofia, como estruturar treinos,
+                      progressão de carga, volume ideal e técnicas avançadas. Linguagem direta, sem enrolação.
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      {[
+                        "Fundamentos científicos da hipertrofia",
+                        "Como estruturar divisões de treino (A/B/C, Push/Pull)",
+                        "Seleção de exercícios baseada em evidências",
+                        "Progressão de carga e periodização",
+                        "Nutrição básica para ganho de massa muscular"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                          <span className="text-muted-foreground">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <p className="text-muted-foreground">
-                  Você também recebe GRATUITAMENTE:
-                </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {[
-                  {
-                    icon: <Calendar className="w-8 h-8 text-accent" />,
-                    title: "BÔNUS #1: Plano de 12 Semanas",
-                    desc: "Periodização completa para iniciantes e intermediários. Apenas siga o plano, não precisa pensar.",
-                  },
-                  {
-                    icon: <Zap className="w-8 h-8 text-accent" />,
-                    title: "BÔNUS #2: Guia de Suplementação",
-                    desc: "O que realmente funciona (e o que é puro marketing). Economize centenas de reais em suplementos inúteis.",
-                  },
-                ].map((bonus, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-card border-2 border-accent/50 rounded-xl p-6 space-y-4 hover:border-accent hover:scale-105 transition-all"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>{bonus.icon}</div>
-                    </div>
-                    <h3 className="font-black text-lg">{bonus.title}</h3>
-                    <p className="text-sm text-muted-foreground">{bonus.desc}</p>
+              {/* Planilha */}
+              <div className="bg-card border-2 border-border rounded-xl p-6 md:p-8 hover:border-accent/50 transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 bg-accent/10 rounded-lg p-3">
+                    <BarChart3 className="w-8 h-8 text-accent" />
                   </div>
-                ))}
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-xl md:text-2xl font-bold">
+                      📊 Planilha de Progressão (Excel / Google Sheets)
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Planilha editável para registrar séries, repetições e cargas. Cálculo automático de volume
+                      e gráficos de evolução. Funciona no Excel (Windows/Mac) e Google Sheets (grátis, online).
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      {[
+                        "Registro de todas as séries e cargas",
+                        "Cálculo automático de volume total semanal",
+                        "Gráficos de evolução por grupo muscular",
+                        "Templates pré-configurados (ABC, ABCD, Push/Pull/Legs)",
+                        "100% editável e personalizável"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                          <span className="text-muted-foreground">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bônus */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-accent/5 border border-accent/30 rounded-xl p-6 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-6 h-6 text-accent" />
+                    <h4 className="font-bold">Bônus #1: Plano de 12 Semanas</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Periodização completa para iniciantes e intermediários. Apenas siga o plano.
+                  </p>
+                </div>
+
+                <div className="bg-accent/5 border border-accent/30 rounded-xl p-6 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-6 h-6 text-accent" />
+                    <h4 className="font-bold">Bônus #2: Guia de Suplementação</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    O que realmente funciona (e o que é marketing). Economize dinheiro em suplementos inúteis.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* CTA INTERMEDIÁRIO */}
-            <div className="bg-gradient-to-r from-accent/20 via-accent/10 to-accent/20 border-2 border-accent rounded-xl p-8 text-center space-y-6">
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground uppercase tracking-wide">
-                  VALOR TOTAL DO PACOTE
-                </p>
-                <p className="text-5xl font-black">
-                  <span className="line-through text-muted-foreground">R$ 97</span>
-                </p>
-                <p className="text-2xl text-muted-foreground">
-                  Hoje por apenas:
-                </p>
-                <p className="text-6xl font-black text-accent">
-                  R$ 19,90
-                </p>
+            {/* Como receber */}
+            <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent rounded-xl p-8 space-y-6">
+              <h3 className="text-xl md:text-2xl font-bold text-center">
+                Como Você Recebe o Acesso
+              </h3>
+              
+              <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-3">
+                  <div className="bg-accent text-background rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto">
+                    1
+                  </div>
+                  <p className="text-sm font-semibold">Finalize o pagamento</p>
+                  <p className="text-xs text-muted-foreground">
+                    Via Kiwify (cartão ou Pix)
+                  </p>
+                </div>
+
+                <div className="text-center space-y-3">
+                  <div className="bg-accent text-background rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto">
+                    2
+                  </div>
+                  <p className="text-sm font-semibold">Receba por e-mail</p>
+                  <p className="text-xs text-muted-foreground">
+                    Imediatamente após aprovação do pagamento
+                  </p>
+                </div>
+
+                <div className="text-center space-y-3">
+                  <div className="bg-accent text-background rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto">
+                    3
+                  </div>
+                  <p className="text-sm font-semibold">Acesso vitalício</p>
+                  <p className="text-xs text-muted-foreground">
+                    Baixe, edite, use quantas vezes quiser
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-background/50 rounded-lg p-4 text-center">
                 <p className="text-sm text-muted-foreground">
-                  pagamento único
+                  <span className="text-foreground font-semibold">Atenção:</span> Verifique sua caixa de spam caso não receba em até 10 minutos.
+                  Se tiver problemas, entre em contato pelo e-mail de suporte.
                 </p>
+              </div>
+            </div>
+
+            {/* Preço */}
+            <div className="text-center space-y-4 pt-8">
+              <p className="text-lg text-muted-foreground">
+                Tudo isso por:
+              </p>
+              <div className="space-y-2">
+                <p className="text-5xl md:text-6xl font-black text-accent">R$ 19,90</p>
+                <p className="text-sm text-muted-foreground">pagamento único</p>
               </div>
 
               <button
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full sm:w-auto"
+                className="btn-cta text-base sm:text-lg px-12 py-6 shadow-2xl shadow-accent/50 mx-auto"
               >
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
-                <span className="text-sm sm:text-base md:text-lg">GARANTIR MINHA VAGA AGORA</span>
+                Quero Acessar Agora
               </button>
 
-              <div className="flex flex-col items-center gap-2">
-                <p className="text-xs text-muted-foreground flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-accent" />
-                  Pagamento 100% seguro processado pela Kiwify
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  ⏰ Oferta expira em {String(timeLeft.hours).padStart(2, "0")}:
-                  {String(timeLeft.minutes).padStart(2, "0")}:
-                  {String(timeLeft.seconds).padStart(2, "0")}
+              <p className="text-xs text-muted-foreground pt-2">
+                Você será redirecionado para o checkout seguro da Kiwify
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ DEMONSTRAÇÃO DO PRODUTO ============ */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-card/30 to-background border-t border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="space-y-12">
+            {/* Título */}
+            <div className="space-y-4 text-center">
+              <h2
+                className="text-3xl md:text-5xl font-black"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Veja Exatamente O Que Você Vai Receber
+              </h2>
+              <div className="h-1 w-24 bg-accent mx-auto" />
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Sem mistério, sem enrolação. Isso é o que chega na sua mão:
+              </p>
+            </div>
+
+            {/* Preview do PDF */}
+            <div className="space-y-6">
+              <div className="bg-card border-2 border-accent/50 rounded-xl p-6 md:p-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl md:text-2xl font-bold flex items-center gap-3">
+                    <BookOpen className="w-7 h-7 text-accent" />
+                    Exemplo: Uma Página do PDF
+                  </h3>
+                  <div className="bg-accent/5 border border-accent/30 rounded-lg overflow-hidden">
+                    <img 
+                      src="/hipertrofia-na-pratica/images/pdf-preview.jpg" 
+                      alt="Preview do PDF Treino Inteligente"
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">O que você encontra no PDF:</strong> explicações diretas sobre como estruturar treinos, 
+                    quando aumentar carga, volume ideal por grupo muscular, e os erros que impedem crescimento.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-2 border-accent/50 rounded-xl p-6 md:p-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl md:text-2xl font-bold flex items-center gap-3">
+                    <BarChart3 className="w-7 h-7 text-accent" />
+                    Exemplo: Tabela da Planilha
+                  </h3>
+                  <div className="bg-accent/5 border border-accent/30 rounded-lg overflow-hidden">
+                    <img 
+                      src="/hipertrofia-na-pratica/images/planilha-preview.jpg" 
+                      alt="Preview da Planilha de Progressão"
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">Como funciona a planilha:</strong> você anota séries/reps/cargas após cada treino, 
+                    e a planilha calcula volume total, mostra gráficos de evolução e indica quando progredir.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Como usar em 3 passos */}
+            <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-center mb-8">
+                Como Usar em 3 Passos Simples
+              </h3>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="space-y-3 text-center">
+                  <div className="bg-accent text-background rounded-full w-14 h-14 flex items-center justify-center font-black text-2xl mx-auto">
+                    1
+                  </div>
+                  <h4 className="font-bold">Leia o PDF</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Entenda os fundamentos e estruture seu treino conforme seu nível e objetivo. Leitura única.
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-center">
+                  <div className="bg-accent text-background rounded-full w-14 h-14 flex items-center justify-center font-black text-2xl mx-auto">
+                    2
+                  </div>
+                  <h4 className="font-bold">Configure a Planilha</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Escolha um template (ABC, Push/Pull, etc.) e personalize com seus exercícios. Tempo: 15-20 minutos (uma vez).
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-center">
+                  <div className="bg-accent text-background rounded-full w-14 h-14 flex items-center justify-center font-black text-2xl mx-auto">
+                    3
+                  </div>
+                  <h4 className="font-bold">Registre e Evolua</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Após cada treino, anote suas cargas. A planilha mostra sua evolução. Tempo: 5-10 min por semana.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 bg-background/50 rounded-lg p-6 text-center">
+                <p className="text-sm text-muted-foreground">
+                  <strong className="text-foreground">Investimento real de tempo:</strong> menos de 15 minutos por semana após a configuração inicial.
+                  O resto é só treinar e ver os resultados aparecerem.
                 </p>
               </div>
             </div>
@@ -724,138 +875,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ TESTIMONIALS SECTION (EXPANDIDA) ============ */}
-      <section className="py-24 bg-gradient-to-b from-card/30 to-background border-t border-border">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="space-y-16">
+      {/* ============ TESTIMONIALS SECTION - REALISTA ============ */}
+      <section className="pt-16 md:pt-24 pb-0 bg-gradient-to-b from-card/30 to-background border-t border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="space-y-12">
             <div className="space-y-4 text-center">
-              <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent px-6 py-3 rounded-full">
-                <Users className="w-5 h-5 text-accent" />
-                <span className="text-sm font-bold text-accent uppercase tracking-wide">
-                  +347 Pessoas Transformadas
-                </span>
-              </div>
               <h2
-                className="text-4xl md:text-6xl font-black"
+                className="text-3xl md:text-5xl font-black"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                Resultados <span className="text-accent">REAIS</span> de Pessoas REAIS
+                O Que Alguns Alunos Estão Dizendo
               </h2>
-              <div className="h-1 w-32 bg-accent mx-auto" />
-              <p className="text-xl text-muted-foreground">
-                Não acredite apenas no que dizemos. Veja o que nossos alunos alcançaram:
+              <div className="h-1 w-24 bg-accent mx-auto" />
+              <p className="text-lg text-muted-foreground">
+                Feedback real de pessoas que estão usando o sistema
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "João Pedro S.",
-                  age: "28 anos",
-                  location: "São Paulo - SP",
-                  testimonial:
-                    "Treinava há 2 ANOS sem ver resultado. Depois do Treino Inteligente, em 8 semanas ganhei 4kg de músculo e aumentei 15kg no supino. A planilha é VICIANTE — você fica obcecado em bater seus recordes.",
-                  rating: 5,
-                  result: "+4kg de músculo em 8 semanas",
-                  image: "👨",
-                },
-                {
-                  name: "Mariana F.",
-                  age: "32 anos",
-                  location: "Rio de Janeiro - RJ",
-                  testimonial:
-                    "Finalmente entendi o que eu estava fazendo de errado! O PDF é MUITO mais completo que qualquer curso caro que já comprei. Vale cada centavo.",
-                  rating: 5,
-                  result: "Passou de 45kg → 60kg no agachamento",
-                  image: "👩",
-                },
-                {
-                  name: "Ricardo M.",
-                  age: "25 anos",
-                  location: "Belo Horizonte - MG",
-                  testimonial:
-                    "Eu estava fazendo TUDO errado. Volume demais, técnica horrível, zero progressão. Esse sistema me salvou de desistir da musculação. Hoje treino com propósito.",
-                  rating: 5,
-                  result: "De iniciante a intermediário em 3 meses",
-                  image: "👨",
-                },
-                {
-                  name: "Amanda L.",
-                  age: "29 anos",
-                  location: "Curitiba - PR",
-                  testimonial:
-                    "A planilha mudou TUDO. Antes eu não sabia se estava evoluindo. Agora eu VEJOnos gráficos. É motivador demais ver as barras subindo semana após semana!",
-                  rating: 5,
-                  result: "Melhorou em TODOS os exercícios",
-                  image: "👩",
-                },
-                {
-                  name: "Felipe R.",
-                  age: "35 anos",
-                  location: "Porto Alegre - RS",
-                  testimonial:
-                    "Treino há 10 anos, mas sempre no 'feeling'. Quando comecei a usar o sistema e rastrear tudo, percebi que estava REGREDINDO em alguns exercícios! Agora tenho controle total.",
-                  rating: 5,
-                  result: "Corrigiu erros de 10 anos",
-                  image: "👨",
-                },
-                {
-                  name: "Juliana K.",
-                  age: "26 anos",
-                  location: "Brasília - DF",
-                  testimonial:
-                    "Melhor investimento que fiz em 2024. Parei de perder tempo com treinos aleatórios e comecei a crescer DE VERDADE. Meu namorado ficou com ciúmes dos meus ganhos 😂",
-                  rating: 5,
-                  result: "+3kg de massa magra em 6 semanas",
-                  image: "👩",
-                },
-              ].map((testimonial, idx) => (
-                <div
-                  key={idx}
-                  className="bg-card border-2 border-border rounded-xl p-6 space-y-4 hover:border-accent hover:scale-105 transition-all"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="text-4xl">{testimonial.image}</div>
-                    <div className="flex gap-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="bg-accent/10 border border-accent rounded-lg px-3 py-2">
-                    <p className="text-xs font-bold text-accent">✨ RESULTADO:</p>
-                    <p className="text-sm font-bold">{testimonial.result}</p>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground italic leading-relaxed">
-                    "{testimonial.testimonial}"
-                  </p>
-
-                  <div className="pt-4 border-t border-border space-y-1">
-                    <p className="font-bold text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {testimonial.age} • {testimonial.location}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            {/* Prints reais de feedback */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-card border-2 border-accent/30 rounded-xl overflow-hidden hover:border-accent transition-all">
+                <img 
+                  src="/hipertrofia-na-pratica/images/feedback1.jpg" 
+                  alt="Feedback de cliente 1"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              
+              <div className="bg-card border-2 border-accent/30 rounded-xl overflow-hidden hover:border-accent transition-all">
+                <img 
+                  src="/hipertrofia-na-pratica/images/feedback2.jpg" 
+                  alt="Feedback de cliente 2"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              
+              <div className="bg-card border-2 border-accent/30 rounded-xl overflow-hidden hover:border-accent transition-all">
+                <img 
+                  src="/hipertrofia-na-pratica/images/feedback3.jpg" 
+                  alt="Feedback de cliente 3"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
             </div>
 
-            {/* Trust badges */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {[
-                { number: "347+", label: "Alunos Ativos" },
-                { number: "4.9/5", label: "Avaliação Média" },
-                { number: "98%", label: "Recomprariam" },
-                { number: "< 24h", label: "Suporte Rápido" },
-              ].map((stat, idx) => (
-                <div key={idx} className="text-center space-y-2">
-                  <p className="text-4xl font-black text-accent">{stat.number}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+            <p className="text-sm text-center text-muted-foreground italic">
+              Prints reais de conversas com clientes (dados pessoais ocultos por privacidade)
+            </p>
           </div>
         </div>
       </section>
@@ -941,82 +1007,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ FAQ SECTION (EXPANDIDO) ============ */}
-      <section className="py-24 bg-card/30 border-t border-border">
+      {/* ============ FAQ SECTION - FOCADO EM CONFIANÇA ============ */}
+      <section className="py-16 md:py-24 bg-card/30 border-t border-border">
         <div className="container max-w-4xl mx-auto px-4">
           <div className="space-y-12">
             <div className="space-y-4 text-center">
               <h2
-                className="text-4xl md:text-5xl font-black"
+                className="text-3xl md:text-5xl font-black"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 Perguntas Frequentes
               </h2>
-              <div className="h-1 w-32 bg-accent mx-auto" />
-              <p className="text-muted-foreground">
-                Ainda tem dúvidas? Vamos eliminar todas as objeções:
-              </p>
+              <div className="h-1 w-24 bg-accent mx-auto" />
             </div>
 
             <div className="space-y-6">
               {[
                 {
-                  question: "❓ É para iniciantes ou apenas para avançados?",
+                  question: "Como recebo o acesso?",
                   answer:
-                    "O Treino Inteligente funciona para QUALQUER NÍVEL. Se você tem pelo menos 3-6 meses de experiência em musculação (conhece os exercícios básicos), este sistema vai acelerar seus resultados. Se você é avançado, vai corrigir erros que nem sabia que estava cometendo.",
+                    "Após a confirmação do pagamento (cartão é imediato, Pix leva até 10 minutos), você recebe um e-mail com os links de download do PDF e da planilha. Verifique sua caixa de spam. Se não receber em até 15 minutos, entre em contato pelo e-mail de suporte.",
                 },
                 {
-                  question: "❓ Preciso de equipamentos especiais?",
+                  question: "O pagamento é seguro?",
                   answer:
-                    "Não! O sistema funciona tanto para academias completas quanto home gyms. Os princípios são universais — você adapta os exercícios ao que tem disponível. A planilha é editável justamente para isso.",
+                    "Sim. O checkout é processado pela Kiwify, uma das maiores plataformas de produtos digitais do Brasil. Eles usam criptografia SSL e são certificados pelas operadoras de cartão. Seus dados estão protegidos.",
                 },
                 {
-                  question: "❓ Quanto tempo leva para ver resultados?",
+                  question: "A planilha funciona no Google Sheets ou só no Excel?",
                   answer:
-                    "A maioria dos nossos alunos nota diferenças VISÍVEIS nas primeiras 4-6 semanas. Mas o mais importante: você vai VER nos números da planilha que está progredindo desde a PRIMEIRA SEMANA. Isso é extremamente motivador.",
+                    "Funciona perfeitamente nos dois. Excel (Windows/Mac) e Google Sheets (grátis, online). Você pode fazer uma cópia e usar de qualquer dispositivo — computador, tablet ou celular.",
                 },
                 {
-                  question: "❓ Como funciona o acesso? É vitalício?",
+                  question: "Isso serve para quem?",
                   answer:
-                    "Sim! Você recebe o PDF e a Planilha por e-mail imediatamente após a confirmação do pagamento. São SEUS para sempre. Pode acessar, editar, imprimir, usar quantas vezes quiser. Sem mensalidades, sem pegadinhas.",
+                    "Se você é iniciante ou avançado e quer sair do platô, esse produto é para você. Não é para iniciantes absolutos (zero experiência) nem para quem já compete. É para o intermediário frustrado que quer método.",
                 },
                 {
-                  question: "❓ Posso usar a planilha no Google Sheets ou apenas no Excel?",
+                  question: "Preciso de dieta perfeita ou suplementos caros?",
                   answer:
-                    "A planilha funciona PERFEITAMENTE tanto no Excel (Windows/Mac) quanto no Google Sheets (online, grátis). Você pode fazer uma cópia e usar de qualquer dispositivo — computador, tablet ou até celular.",
+                    "Não. O foco é treino e progressão. O PDF tem orientações básicas de nutrição (calorias, proteína), mas não exige dieta complexa. Sobre suplementos: o bônus mostra o que realmente funciona (spoiler: bem menos do que você imagina).",
                 },
                 {
-                  question: "❓ E se eu não gostar? Como funciona a garantia?",
+                  question: "E se eu tiver problemas com o acesso?",
                   answer:
-                    "Simples: você tem 7 DIAS COMPLETOS para usar o sistema. Se, por qualquer motivo, você não achar que valeu cada centavo, é só me enviar um email e eu devolvo 100% do seu dinheiro. Sem perguntas, sem burocracia. Você não corre NENHUM risco.",
+                    "Temos suporte por e-mail. Respondemos todas as dúvidas sobre acesso, uso da planilha ou dúvidas técnicas em até 24-48 horas úteis. Se você não recebeu os arquivos, resolvemos rapidamente.",
                 },
                 {
-                  question: "❓ Vocês dão suporte?",
+                  question: "Como funciona a garantia de 7 dias?",
                   answer:
-                    "SIM! Você tem acesso a suporte por e-mail para tirar dúvidas sobre o conteúdo do PDF ou sobre como usar a planilha. Respondemos todas as dúvidas em até 24-48h.",
+                    "Você compra, testa o sistema por 7 dias completos. Se não gostar por qualquer motivo, solicita reembolso por e-mail. A Kiwify processa o estorno conforme as regras da plataforma (normalmente de 5 a 10 dias úteis, dependendo do meio de pagamento).",
                 },
                 {
-                  question: "❓ O preço vai subir?",
+                  question: "O preço vai aumentar?",
                   answer:
-                    "SIM. Esta é uma oferta de lançamento. Estamos limitando a 50 vagas neste preço de R$ 19,90. Depois disso, o preço volta para R$ 97 (valor normal). Não perca esta janela de oportunidade.",
-                },
-                {
-                  question: "❓ Por que tão barato? Qual a pegadinha?",
-                  answer:
-                    "Não tem pegadinha. O produto é digital — não tem custo de produção, estoque ou frete. Prefiro vender para MUITA gente a um preço justo do que cobrar caro e vender pouco. Simples assim. Minha meta é transformar o máximo de pessoas possível.",
+                    "Possivelmente. R$ 19,90 é o preço de lançamento. Mas não há 'vagas limitadas' artificiais — enquanto estiver disponível por esse valor, você pode comprar.",
                 },
               ].map((faq, idx) => (
                 <div
                   key={idx}
-                  className="bg-card border-2 border-border rounded-xl p-6 space-y-3 hover:border-accent/50 transition-all"
+                  className="bg-card border border-border rounded-xl p-6 space-y-3 hover:border-accent/50 transition-all"
                 >
-                  <h3
-                    className="font-black text-lg"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
+                  <h3 className="font-bold text-lg">
                     {faq.question}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -1024,78 +1079,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ CHECKOUT SECTION (ULTRA PERSUASIVO) ============ */}
-      <section id="checkout" className="py-24 bg-gradient-to-b from-background to-card/50 border-t border-border relative overflow-hidden">
-        {/* Background effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-accent/5 animate-pulse" />
-        
-        <div className="container max-w-4xl mx-auto px-4 relative z-10">
+      {/* ============ CHECKOUT SECTION - LIMPA ============ */}
+      <section id="checkout" className="py-16 md:py-24 bg-gradient-to-b from-background to-card/50 border-t border-border">
+        <div className="container max-w-4xl mx-auto px-4">
           <div className="space-y-12">
             <div className="space-y-6 text-center">
-              <div className="inline-flex items-center gap-2 bg-destructive/20 border-2 border-destructive px-6 py-3 rounded-full animate-pulse">
-                <AlertTriangle className="w-5 h-5 text-destructive" />
-                <span className="text-sm font-bold text-destructive uppercase tracking-wide">
-                  ÚLTIMAS {Math.floor(Math.random() * 8) + 3} VAGAS RESTANTES
-                </span>
-              </div>
-
               <h2
-                className="text-4xl md:text-6xl font-black"
+                className="text-3xl md:text-5xl font-black"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                Você Está a <span className="text-accent">1 DECISÃO</span>
-                <br />
-                de Transformar Seu Corpo
+                Pronto Para Começar?
               </h2>
-              <div className="h-1 w-32 bg-accent mx-auto" />
-              
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                A diferença entre quem cresce e quem fica estagnado?
-                <br />
-                <span className="text-foreground font-bold text-2xl">
-                  A decisão de agir AGORA.
-                </span>
+              <div className="h-1 w-24 bg-accent mx-auto" />
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Tudo o que você precisa para organizar seus treinos e progredir de forma consistente
               </p>
             </div>
 
             {/* Oferta Principal */}
-            <div className="bg-gradient-to-br from-card via-background to-card border-4 border-accent rounded-2xl p-8 md:p-12 space-y-8 shadow-2xl shadow-accent/30">
-              <div className="space-y-4">
+            <div className="bg-card border-2 border-accent rounded-2xl p-8 md:p-12 space-y-8 shadow-xl">
+              <div className="space-y-6">
                 <p className="text-sm text-center text-muted-foreground uppercase tracking-wide">
-                  📦 PACOTE COMPLETO - TUDO INCLUÍDO
+                  O que está incluído
                 </p>
                 
                 <div className="space-y-3">
                   {[
-                    "✅ PDF Treino Inteligente (50+ páginas)",
+                    "✅ PDF Treino Inteligente",
                     "✅ Planilha de Progressão Automática",
-                    "✅ BÔNUS #1: Plano de 12 Semanas",
-                    "✅ BÔNUS #2: Guia de Suplementação",
+                    "✅ Bônus #1: Plano de 12 Semanas",
+                    "✅ Bônus #2: Guia de Suplementação",
+                    "✅ Acesso vitalício (sem mensalidades)",
+                    "✅ Suporte por e-mail",
                   ].map((item, idx) => (
-                    <div key={idx} className="bg-card/50 rounded-lg p-4 border border-border">
-                      <span className="font-medium">{item}</span>
+                    <div key={idx} className="flex items-center gap-3 text-sm md:text-base">
+                      <Check className="w-5 h-5 text-accent flex-shrink-0" />
+                      <span>{item}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="border-t-2 border-accent pt-4">
-                  <div className="flex items-center justify-between text-muted-foreground mb-2">
-                    <span className="text-lg">Valor Total:</span>
-                    <span className="text-2xl line-through">R$ 97</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold">Hoje por apenas:</span>
-                    <div className="text-right">
-                      <div className="text-5xl md:text-6xl font-black text-accent">R$ 19,90</div>
-                      <p className="text-sm text-muted-foreground">pagamento único</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-accent/10 border-2 border-accent rounded-lg p-4 text-center">
-                  <p className="text-sm font-bold text-accent">
-                    🔥 DESCONTO DE 80% - APENAS NAS PRIMEIRAS 50 VAGAS
-                  </p>
+                <div className="border-t-2 border-accent pt-6 text-center space-y-3">
+                  <p className="text-xl">Investimento:</p>
+                  <div className="text-5xl md:text-6xl font-black text-accent">R$ 19,90</div>
+                  <p className="text-sm text-muted-foreground">pagamento único</p>
                 </div>
               </div>
 
@@ -1104,113 +1131,72 @@ export default function Home() {
                   onClick={() => {
                     window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                   }}
-                  className="w-full bg-accent hover:bg-accent/90 text-background font-black text-lg sm:text-xl md:text-2xl py-6 md:py-8 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-2xl shadow-accent/50 animate-pulse"
+                  className="w-full bg-accent hover:bg-accent/90 text-background font-bold text-lg md:text-xl py-6 md:py-7 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl shadow-accent/30"
                 >
-                  <Zap className="w-6 h-6 sm:w-8 sm:h-8 mr-2 sm:mr-3 inline" />
-                  <span>SIM! QUERO GARANTIR MINHA VAGA AGORA</span>
-                  <br />
-                  <span className="text-xs sm:text-sm font-normal opacity-90">
-                    (ACESSO IMEDIATO - COMPRA 100% SEGURA)
-                  </span>
+                  Quero usar esse sistema de treino por R$ 19,90
                 </button>
 
-                {/* Badge Kiwify - Pagamento Seguro */}
-                <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center">
-                  <p className="text-sm font-bold text-accent mb-2">
-                    🔒 PAGAMENTO 100% SEGURO PROCESSADO PELA KIWIFY
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Ambiente seguro com certificado SSL. Seus dados estão protegidos.
-                  </p>
-                </div>
+                <p className="text-xs text-center text-muted-foreground">
+                  Você será redirecionado para o checkout seguro da Kiwify
+                  <br />
+                  Pagamento com cartão (aprovação imediata) ou Pix
+                </p>
 
-                <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
+                <div className="flex items-center justify-center gap-6 pt-4 text-sm text-muted-foreground flex-wrap">
                   <div className="flex items-center gap-2">
                     <Shield className="w-5 h-5 text-accent" />
-                    <span>Compra Segura (SSL)</span>
+                    <span>Checkout seguro</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Check className="w-5 h-5 text-accent" />
-                    <span>Garantia de 7 Dias</span>
+                    <span>Garantia de 7 dias</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-5 h-5 text-accent" />
-                    <span>Acesso Imediato</span>
+                    <span>Acesso por e-mail</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Countdown Timer */}
-              <div className="bg-destructive/10 border-2 border-destructive rounded-lg p-6 text-center space-y-3">
-                <p className="font-bold text-destructive flex items-center justify-center gap-2">
-                  <AlertTriangle className="w-5 h-5" />
-                  ATENÇÃO: Esta Oferta Expira Em
-                </p>
-                <div className="flex justify-center gap-4">
-                  <div className="bg-background rounded-lg p-4 min-w-[80px]">
-                    <div className="text-3xl font-black text-accent">
-                      {String(timeLeft.hours).padStart(2, "0")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">HORAS</div>
-                  </div>
-                  <div className="bg-background rounded-lg p-4 min-w-[80px]">
-                    <div className="text-3xl font-black text-accent">
-                      {String(timeLeft.minutes).padStart(2, "0")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">MINUTOS</div>
-                  </div>
-                  <div className="bg-background rounded-lg p-4 min-w-[80px]">
-                    <div className="text-3xl font-black text-accent">
-                      {String(timeLeft.seconds).padStart(2, "0")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">SEGUNDOS</div>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Após o prazo, o preço retorna para R$ 97
-                </p>
               </div>
             </div>
 
-            {/* Seção "Quem É vs Quem NÃO É" */}
-            <div className="grid md:grid-cols-2 gap-8 pt-8">
-              <div className="bg-accent/5 border-2 border-accent rounded-xl p-8 space-y-4">
-                <h3 className="text-2xl font-black text-accent flex items-center gap-3">
-                  <Check className="w-8 h-8" />
-                  Este Produto É Para Você Se:
-                </h3>
+            {/* Para quem é / Para quem NÃO é */}
+            <div className="bg-card border border-border rounded-xl p-8 space-y-6">
+              <h3 className="text-2xl font-bold text-center">
+                Para Quem É Este Produto
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-3">
+                  <p className="font-semibold text-accent flex items-center gap-2">
+                    <Check className="w-5 h-5" />
+                    Ideal para você se:
+                  </p>
                   {[
-                    "Você leva o treino a sério e quer resultados REAIS",
-                    "Está cansado de copiar treinos aleatórios",
-                    "Quer um método científico e comprovado",
-                    "Valoriza progressão mensurável e consistente",
-                    "Está disposto a seguir um plano estruturado",
+                    "Treina há pelo menos 6 meses",
+                    "Quer sair do platô e progredir",
+                    "Busca método organizado",
+                    "Está disposto a anotar treinos",
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{item}</span>
+                    <div key={idx} className="flex items-start gap-2 text-sm">
+                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
                     </div>
                   ))}
                 </div>
-              </div>
 
-              <div className="bg-destructive/5 border-2 border-destructive rounded-xl p-8 space-y-4">
-                <h3 className="text-2xl font-black text-destructive flex items-center gap-3">
-                  <X className="w-8 h-8" />
-                  Este Produto NÃO É Para Você Se:
-                </h3>
                 <div className="space-y-3">
+                  <p className="font-semibold text-destructive flex items-center gap-2">
+                    <X className="w-5 h-5" />
+                    Não é para você se:
+                  </p>
                   {[
-                    "Você busca pílulas mágicas ou atalhos impossíveis",
-                    "Não está disposto a anotar e rastrear progresso",
-                    "Quer resultados sem esforço ou consistência",
-                    "Prefere continuar no 'achismo' e improvisar",
-                    "Acha que sabe tudo e não precisa aprender",
+                    "Busca soluções mágicas instantâneas",
+                    "Não quer anotar e rastrear progresso",
+                    "Espera resultados sem esforço",
+                    "Prefere improvisar sem plano",
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-muted-foreground">{item}</span>
+                    <div key={idx} className="flex items-start gap-2 text-sm">
+                      <X className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -1218,36 +1204,31 @@ export default function Home() {
             </div>
 
             {/* Última chamada */}
-            <div className="bg-card border-2 border-accent rounded-xl p-8 text-center space-y-6">
-              <h3 className="text-3xl font-black">
-                Ainda Está em Dúvida?
+            <div className="bg-card border border-border rounded-xl p-8 text-center space-y-6">
+              <h3 className="text-2xl md:text-3xl font-bold">
+                Investimento de R$ 19,90 • Garantia de 7 Dias
               </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Pense assim: <span className="text-foreground font-bold">quanto vale 1 ano da sua vida</span>?
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Você pode continuar treinando sem direção clara, ou pode investir menos que o preço de um lanche
+                em um sistema que organiza seus treinos e mostra sua evolução.
                 <br /><br />
-                Você pode continuar no mesmo corpo, fazendo os mesmos erros... OU pode investir R$ 19,90 hoje
-                e ter o corpo que sempre quis <span className="text-accent font-bold">nos próximos 6-12 meses</span>.
-                <br /><br />
-                Se você treina há mais de 6 meses sem resultados expressivos, não é falta de esforço.
-                É falta de <span className="text-accent font-bold">MÉTODO</span>.
-                <br /><br />
-                E lembre-se: <span className="text-accent font-bold">você tem 7 dias de garantia</span>.
-                Literalmente ZERO risco.
+                <span className="text-foreground font-semibold">
+                  Com garantia de 7 dias, você não tem nada a perder.
+                </span>
               </p>
               
               <button
                 onClick={() => {
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
-                className="btn-cta text-base sm:text-lg md:text-xl px-8 sm:px-12 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full sm:w-auto"
+                className="bg-accent hover:bg-accent/90 text-background font-bold text-lg px-10 py-5 rounded-xl transition-all hover:scale-105 shadow-xl shadow-accent/30"
               >
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 inline" />
-                <span className="text-sm sm:text-base md:text-lg">CHEGA DE ENROLAÇÃO - EU QUERO CRESCER!</span>
+                Quero Começar Agora
               </button>
 
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
                 <Shield className="w-4 h-4 text-accent" />
-                Pagamento 100% seguro processado pela Kiwify
+                Checkout seguro via Kiwify
               </p>
             </div>
           </div>
@@ -1270,15 +1251,15 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex gap-8 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-accent transition-colors">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-muted-foreground text-center md:text-left">
+              <a href="mailto:contato@treinointeligente.com" className="hover:text-accent transition-colors">
+                Contato: contato@treinointeligente.com
+              </a>
+              <a href="/politica-privacidade.html" className="hover:text-accent transition-colors">
                 Política de Privacidade
               </a>
-              <a href="#" className="hover:text-accent transition-colors">
+              <a href="/termos-uso.html" className="hover:text-accent transition-colors">
                 Termos de Uso
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                Contato
               </a>
             </div>
           </div>
@@ -1291,17 +1272,16 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* BOTÃO FIXO MOBILE - SEMPRE VISÍVEL */}
+      {/* BOTÃO FIXO MOBILE */}
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
         <button
           onClick={() => {
             window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
           }}
-          className="w-full bg-accent hover:bg-accent/90 text-background font-black text-base sm:text-lg py-5 px-4 transition-all duration-300 shadow-2xl border-t-4 border-accent/20 animate-pulse"
+          className="w-full bg-accent hover:bg-accent/90 text-background font-bold text-base py-4 px-4 transition-all shadow-xl border-t-2 border-background"
         >
           <div className="flex items-center justify-center gap-2">
-            <Zap className="w-6 h-6" />
-            <span>GARANTIR MINHA VAGA AGORA</span>
+            <span>Acessar por R$ 19,90</span>
           </div>
         </button>
       </div>
