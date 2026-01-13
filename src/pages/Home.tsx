@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check, Zap, BookOpen, BarChart3, AlertTriangle, TrendingUp, Shield, Clock, Target, Flame, Award, Users, Calendar, Trophy, X, Star } from "lucide-react";
 import { useState, useEffect } from "react";
+import { trackCTAClick, trackScrollDepth, trackTimeOnPage } from "@/lib/analytics";
 
 /**
  * DESIGN PHILOSOPHY: Dark Intensity
@@ -20,6 +21,12 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Inicializar analytics ao carregar a página
+  useEffect(() => {
+    trackTimeOnPage();
+    trackScrollDepth();
   }, []);
 
   return (
@@ -88,6 +95,7 @@ export default function Home() {
             <div className="flex flex-col gap-4 pt-8 max-w-md">
               <button
                 onClick={() => {
+                  trackCTAClick('hero_section', 'Quero Usar Esse Sistema por R$ 19,90');
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="btn-cta text-base sm:text-lg px-8 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full"
@@ -601,6 +609,7 @@ export default function Home() {
 
               <button
                 onClick={() => {
+                  trackCTAClick('after_solution', 'Quero Usar Esse Sistema');
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="btn-cta text-base sm:text-lg px-12 py-6 shadow-2xl shadow-accent/50 mx-auto"
@@ -1129,6 +1138,7 @@ export default function Home() {
               <div className="space-y-4">
                 <button
                   onClick={() => {
+                    trackCTAClick('guarantee_section', 'Quero Usar Esse sistema por R$ 19,90');
                     window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                   }}
                   className="w-full bg-accent hover:bg-accent/90 text-background font-bold text-lg md:text-xl py-6 md:py-7 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl shadow-accent/30"
@@ -1219,6 +1229,7 @@ export default function Home() {
               
               <button
                 onClick={() => {
+                  trackCTAClick('after_faq', 'Quero Começar Agora');
                   window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
                 }}
                 className="bg-accent hover:bg-accent/90 text-background font-bold text-lg px-10 py-5 rounded-xl transition-all hover:scale-105 shadow-xl shadow-accent/30"
@@ -1276,6 +1287,7 @@ export default function Home() {
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
         <button
           onClick={() => {
+            trackCTAClick('floating_mobile_button', 'Comprar Agora - Mobile');
             window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
           }}
           className="w-full bg-accent hover:bg-accent/90 text-background font-bold text-base py-4 px-4 transition-all shadow-xl border-t-2 border-background"
