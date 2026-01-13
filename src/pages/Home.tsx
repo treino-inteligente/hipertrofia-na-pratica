@@ -31,8 +31,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      {/* ============ HERO SECTION ============ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20 pb-24 md:pb-20">
+      {/* ============ HERO SECTION - REFORMULADO ============ */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20 pb-12 md:pb-16">
         {/* Background image with overlay */}
         <div
           className="absolute inset-0 z-0"
@@ -40,200 +40,256 @@ export default function Home() {
             backgroundImage: "url('/images/hero-athlete.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.3,
+            opacity: 0.2,
             transform: `translateY(${isScrolled ? 50 : 0}px)`,
             transition: "transform 0.3s ease-out",
           }}
         />
 
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40 z-1" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60 z-1" />
 
         {/* Content */}
-        <div className="container relative z-10 max-w-5xl mx-auto px-4">
-          <div className="space-y-8 animate-fade-in">
-            {/* Main Headline */}
-            <div className="space-y-4">
-              <h1
-                className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] md:leading-[1.05]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                Um sistema simples de treino para quem{" "}
-                <span className="text-accent">já treina, mas parou de evoluir</span>
+        <div className="container relative z-10 max-w-6xl mx-auto px-4">
+          {/* ========== MOBILE: Ordem otimizada ========== */}
+          <div className="block md:hidden space-y-6">
+            {/* 1. Badge + Headline curta e direta */}
+            <div className="space-y-3 text-center animate-fade-in">
+              <div className="inline-block bg-accent/10 border border-accent px-4 py-2 rounded-full">
+                <span className="text-xs font-bold text-accent uppercase">Transformação Real</span>
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl font-black leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                4 Anos Treinando
+                <br />
+                <span className="text-destructive">SEM Resultado</span>
+                <br />
+                <span className="text-accent">vs</span>
+                <br />
+                1 Ano COM Método
               </h1>
             </div>
 
-            {/* Subheadline */}
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
-              Planilha + PDF prático para organizar seus treinos, progredir cargas e parar de treinar no escuro.
-            </p>
-
-            {/* Mini insight */}
-            <p className="text-base md:text-lg text-foreground/80 italic max-w-2xl border-l-4 border-accent pl-4">
-              A maioria das pessoas não falha por falta de esforço, mas por treinar sem estrutura.
-            </p>
-
-            {/* Para quem é */}
-            <div className="bg-card/50 border border-border rounded-lg p-6 space-y-3 max-w-2xl">
-              <p className="font-semibold text-foreground">
-                Este produto é para você se:
-              </p>
-              {[
-                "É iniciante ou avançado na musculação",
-                "Busca um método simples e organizado para progredir",
-                "Quer acompanhar seus treinos de forma clara e visual",
-                "Prefere planos baseados em evidências ao invés de 'modinha'",
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-sm">
-                  <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{item}</span>
+            {/* 2. FOTOS GRANDES - Prova visual IMEDIATA */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <div className="relative rounded-xl overflow-hidden border-4 border-destructive shadow-2xl">
+                  <img 
+                    src="/hipertrofia-na-pratica/images/antes.jpg" 
+                    alt="Antes - 4 anos sem método"
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute top-2 left-2 bg-destructive text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg">
+                    ANTES
+                  </div>
                 </div>
-              ))}
+                <p className="text-xs text-center text-destructive font-bold">
+                  4 anos NO ESCURO
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="relative rounded-xl overflow-hidden border-4 border-accent shadow-2xl animate-pulse">
+                  <img 
+                    src="/hipertrofia-na-pratica/images/depois.jpg" 
+                    alt="Depois - 1 ano com método"
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute top-2 left-2 bg-accent text-background text-xs px-3 py-1.5 rounded-full font-bold shadow-lg">
+                    DEPOIS
+                  </div>
+                </div>
+                <p className="text-xs text-center text-accent font-bold">
+                  1 ano COM ESTRUTURA
+                </p>
+              </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="flex flex-col gap-4 pt-8 max-w-md">
-              <button
-                onClick={() => {
-                  trackCTAClick('hero_section', 'Quero Usar Esse Sistema por R$ 19,90');
-                  window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
-                }}
-                className="btn-cta text-base sm:text-lg px-8 py-5 sm:py-6 shadow-2xl shadow-accent/50 w-full"
-              >
-                <span>Quero Usar Esse Sistema por R$ 19,90</span>
-              </button>
-              <p className="text-xs text-center text-muted-foreground">
-                Pagamento seguro processado pela Kiwify
+            {/* 3. Subheadline compacta */}
+            <div className="bg-background/80 border-2 border-accent/30 rounded-lg p-4 text-center">
+              <p className="text-sm text-foreground font-semibold">
+                O problema não era esforço.
                 <br />
-                Você será redirecionado para o checkout
+                Era <span className="text-accent">treinar sem método</span>.
               </p>
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap gap-6 pt-8 text-sm">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Check className="w-5 h-5 text-accent" />
-                <span className="font-medium">Acesso por e-mail após pagamento</span>
+            {/* 4. CTA GIGANTE */}
+            <button
+              onClick={() => {
+                trackCTAClick('hero_section_mobile', 'Quero Transformar Meu Treino');
+                window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
+              }}
+              className="btn-cta text-lg px-6 py-7 shadow-2xl shadow-accent/50 w-full animate-pulse"
+            >
+              <span className="font-black">Quero Este Método por R$ 19,90</span>
+            </button>
+
+            {/* 5. Trust badges */}
+            <div className="flex items-center justify-center gap-4 text-xs">
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <Shield className="w-4 h-4 text-accent" />
+                <span className="font-semibold">Garantia 7 dias</span>
               </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Shield className="w-5 h-5 text-accent" />
-                <span className="font-medium">Garantia de 7 dias</span>
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <Zap className="w-4 h-4 text-accent" />
+                <span className="font-semibold">Acesso na hora</span>
               </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <BookOpen className="w-5 h-5 text-accent" />
-                <span className="font-medium">PDF + Planilha editável</span>
+            </div>
+          </div>
+
+          {/* ========== DESKTOP: Layout 2 colunas ========== */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            
+            {/* LADO ESQUERDO: História + Prova Visual */}
+            <div className="space-y-6 animate-fade-in">
+              <div className="space-y-3">
+                <div className="inline-block bg-accent/10 border border-accent px-4 py-2 rounded-full">
+                  <span className="text-sm font-bold text-accent">TRANSFORMAÇÃO REAL</span>
+                </div>
+                
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  Eu Treinava 4 Anos Sem Resultado...
+                </h2>
+                
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Até descobrir que o problema não era esforço.
+                  <br />
+                  <span className="text-foreground font-semibold">Era treinar sem método.</span>
+                </p>
               </div>
+
+              {/* Fotos Antes/Depois - DESTAQUE VISUAL */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Antes */}
+                <div className="space-y-2">
+                  <div className="relative rounded-lg overflow-hidden border-2 border-destructive shadow-xl">
+                    <img 
+                      src="/hipertrofia-na-pratica/images/antes.jpg" 
+                      alt="Antes - 4 anos sem método"
+                      className="w-full h-auto object-cover"
+                    />
+                    <div className="absolute top-2 left-2 bg-destructive text-white text-xs px-3 py-1 rounded-full font-bold">
+                      ANTES
+                    </div>
+                  </div>
+                  <p className="text-xs text-center text-muted-foreground font-medium">
+                    4 anos treinando<br />SEM método
+                  </p>
+                </div>
+
+                {/* Depois */}
+                <div className="space-y-2">
+                  <div className="relative rounded-lg overflow-hidden border-2 border-accent shadow-xl">
+                    <img 
+                      src="/hipertrofia-na-pratica/images/depois.jpg" 
+                      alt="Depois - 1 ano com método"
+                      className="w-full h-auto object-cover"
+                    />
+                    <div className="absolute top-2 left-2 bg-accent text-background text-xs px-3 py-1 rounded-full font-bold">
+                      DEPOIS
+                    </div>
+                  </div>
+                  <p className="text-xs text-center text-muted-foreground font-medium">
+                    1 ano aplicando<br />ESTE método
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-accent/5 border-l-4 border-accent p-4 rounded-r">
+                <p className="text-sm text-foreground italic">
+                  "Não sou Personal, não uso anabolizantes, não tenho genética privilegiada.
+                  Sou só uma pessoa comum que <span className="font-bold">parou de treinar no achismo</span>."
+                </p>
+                <p className="text-xs text-muted-foreground mt-2">— Lucas Sambati</p>
+              </div>
+            </div>
+
+            {/* LADO DIREITO: Headline + CTA */}
+            <div className="space-y-6 animate-fade-in">
+              <div className="space-y-4">
+                <h1
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  Você Treina Pesado, Mas{" "}
+                  <span className="text-accent">Não Cresce</span>?
+                </h1>
+                
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                  O problema não é falta de esforço.
+                  <br />
+                  É <span className="text-foreground font-bold">falta de ESTRUTURA</span>.
+                </p>
+              </div>
+
+              {/* Para quem é - MAIS COMPACTO */}
+              <div className="bg-card/60 border border-accent/30 rounded-lg p-5 space-y-3">
+                <p className="font-bold text-accent text-sm uppercase tracking-wide">
+                  ✓ Este sistema é para você:
+                </p>
+                {[
+                  "Treina há meses/anos mas parou de evoluir",
+                  "Não sabe se está progredindo ou estagnado",
+                  "Quer um método simples e comprovado",
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-sm">
+                    <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Button - MAIS DESTAQUE */}
+              <div className="space-y-3 pt-4">
+                <button
+                  onClick={() => {
+                    trackCTAClick('hero_section', 'Quero Transformar Meu Treino');
+                    window.location.href = "https://pay.kiwify.com.br/fUcu9RX";
+                  }}
+                  className="btn-cta text-base sm:text-lg px-8 py-6 shadow-2xl shadow-accent/50 w-full"
+                >
+                  <span>Quero Transformar Meu Treino por R$ 19,90</span>
+                </button>
+                
+                <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Shield className="w-4 h-4 text-accent" />
+                    <span>Garantia 7 dias</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Zap className="w-4 h-4 text-accent" />
+                    <span>Acesso imediato</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs text-center text-muted-foreground italic">
+                Pagamento seguro via Kiwify • PDF + Planilha editável
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============ QUEM SOU EU - AUTORIDADE REAL ============ */}
-      <section className="py-16 md:py-20 bg-card/30 border-t border-border">
+      {/* ============ PROOF POINT RÁPIDO ============ */}
+      <section className="py-12 bg-card/20 border-y border-border">
         <div className="container max-w-4xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            {/* Foto perfil */}
-            <div className="flex-shrink-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-accent/10 border-2 border-accent overflow-hidden">
-                <img 
-                  src="/hipertrofia-na-pratica/images/perfil.jpg" 
-                  alt="Lucas Sambati"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Texto */}
-            <div className="flex-1 space-y-4 text-center md:text-left">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                  Olá, sou Lucas Sambati
-                </h2>
-                <p className="text-muted-foreground">
-                  Eu não sou Personal Trainer e nem Influencer Fitness.
-                  <br />
-                  <span className="text-foreground">Sou uma pessoa comum</span> que sempre treinou, se esforçava de verdade… e não via resultado.
-                </p>
-              </div>
-
-              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                Por muito tempo achei que o problema era a falta de vontade ou a genética.
-                <br />
-                Até entender que eu treinava <span className="text-foreground">sem estrutura, carga e progressão bem definidas.</span>
-              </p>
-
-              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                Então fui estudar a fundo como o treino realmente funciona.
-                <br />
-                <span className="text-foreground">Apliquei isso em mim mesmo</span> e finalmente consegui trazer para a vida real os resultados que a gente costuma ver só no Instagram.
-              </p>
-
-              {/* Fotos Antes/Depois */}
-              <div className="pt-2 pb-0 space-y-4">
-                <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto md:mx-0">
-                  {/* Antes */}
-                  <div className="space-y-2">
-                    <div className="relative rounded-lg overflow-hidden border-2 border-border shadow-lg">
-                      <img 
-                        src="/hipertrofia-na-pratica/images/antes.jpg" 
-                        alt="Antes - 4 anos de treino"
-                        className="w-full h-auto object-cover"
-                      />
-                      <div className="absolute top-2 left-2 bg-destructive/90 text-white text-xs px-2 py-1 rounded font-bold">
-                        ANTES
-                      </div>
-                    </div>
-                    <p className="text-xs text-center text-muted-foreground">
-                      4 anos de treino<br />sem método
-                    </p>
-                  </div>
-
-                  {/* Depois */}
-                  <div className="space-y-2">
-                    <div className="relative rounded-lg overflow-hidden border-2 border-accent shadow-lg">
-                      <img 
-                        src="/hipertrofia-na-pratica/images/depois.jpg" 
-                        alt="Depois - 1 ano aplicando o método"
-                        className="w-full h-auto object-cover"
-                      />
-                      <div className="absolute top-2 left-2 bg-accent text-background text-xs px-2 py-1 rounded font-bold">
-                        DEPOIS
-                      </div>
-                    </div>
-                    <p className="text-xs text-center text-muted-foreground">
-                      1 ano aplicando<br />este método
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                Esse método não é milagre nem promessa vazia.
-                <br />
-                <span className="text-foreground">É um sistema simples, prático e testado no dia a dia para quem quer resultados sem enrolação.</span>
-              </p>
-
-              <div className="flex flex-wrap gap-4 pt-4 text-sm justify-center md:justify-start">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Check className="w-4 h-4 text-accent" />
-                  <span>Baseado em uso real</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Check className="w-4 h-4 text-accent" />
-                  <span>Sem promessas absurdas</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Check className="w-4 h-4 text-accent" />
-                  <span>Suporte por e-mail</span>
-                </div>
-              </div>
-            </div>
+          <div className="text-center space-y-4">
+            <h3 className="text-xl md:text-2xl font-bold">
+              Por Que Ouvir Alguém Que <span className="text-accent">NÃO é Personal</span>?
+            </h3>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+              Porque passei EXATAMENTE pelo que você está passando.
+              <br />
+              4 anos treinando sem resultado → <span className="text-accent font-semibold">1 ano com método = transformação</span>
+            </p>
           </div>
         </div>
       </section>
 
       {/* ============ PROBLEM SECTION (EXPANDED - 7 DORES) ============ */}
-      <section className="pt-12 sm:pt-16 md:pt-24 bg-gradient-to-b from-card/50 to-background border-t border-border">
+      <section className="pt-12 sm:pt-16 md:pt-20 pb-12 bg-gradient-to-b from-card/30 to-background">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="space-y-16">
             <div className="space-y-4 sm:space-y-6 text-center max-w-3xl mx-auto">
